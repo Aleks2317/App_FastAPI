@@ -8,6 +8,7 @@ from dto import user as UserDTO
 
 router = APIRouter()
 
+
 @router.post("/", tags=["user"])
 async def create(data: UserDTO.User = None, db: Session = Depends(get_db)):
     return UserService.create_user(data, db)
@@ -18,9 +19,15 @@ async def get(id: int, db: Session = Depends(get_db)):
     return UserService.get_user(id, db)
 
 
+@router.get("/users_all/", tags=["users"])
+async def get_all(db: Session = Depends(get_db)):
+    return UserService.get_users_all(db)
+
+
 @router.put("/{id}", tags=["user"])
 async def update(id: int, data:UserDTO.User = None, db: Session = Depends(get_db)):
     return UserService.update(id, data, db)
+
 
 @router.delete("/{id}", tags=["user"])
 async def delete(id: int, db: Session = Depends(get_db)):

@@ -18,6 +18,10 @@ def get_user(id: int, db):
     return db.query(User).filter(User.id == id).first()
 
 
+def get_users_all(db):
+    return db.query(User).all()
+
+
 def update(id: int, data: user.User, db: Session):
     user = db.query(User).filter(User.id == id).first()
     user.name = data.name
